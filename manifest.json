@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "Metaprint",
+  "description": "Metaprint measures your carbon footprint",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    
+  ]
+}
