@@ -31,11 +31,11 @@ gulp.task('watch', function() {
 });
 
 gulp.task('dev', ['build', 'watch'], function() {
-    $.nodemon({
-        script: 'index.js',
-        watch: ['controllers', 'models', 'config', 'lib'],
-        exec: 'node --inspect',
-    });
+    // $.nodemon({
+    //     script: 'index.js',
+    //     watch: ['controllers', 'models', 'config', 'lib'],
+    //     exec: 'node --inspect',
+    // });
 });
 
-gulp.task('build', ['webpackify-components']);
+gulp.task('build', ['webpackify-components', 'component-css', 'copy-assets']);
