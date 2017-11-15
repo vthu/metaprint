@@ -4,7 +4,8 @@ import { setTimeout } from 'timers';
 
 class Home extends React.PureComponent {
   state = {
-    isLoaded: false
+    isLoaded: false,
+    carbonScore: 0
   }
 
   componentWillMount() {
@@ -18,12 +19,26 @@ class Home extends React.PureComponent {
       .get(`https://graph.facebook.com/me?access_token=${accessToken}&fields=id,name,picture`)
       .then((result) => {
         const user = result.data;
+        let scores = {
+          carbonScore: 0,
+          greenScore: 0,
+          pointsEarned: 0
+        }
+        if ( window.localStorage.getItem('showCredits')) {
+          scores = {
+            carbonScore: 20,
+            greenScore: 0,
+            pointsEarned: 0
+          }
+        }
         this.setState({
           isLoaded: true,
           name: user.name,
           profilePic: user.picture.data.url,
-          id: user.id
+          id: user.id,
+          ...scores
         });
+        window.localStorage.setItem('showCredits', true);
       })
   }
 
@@ -39,6 +54,12 @@ class Home extends React.PureComponent {
       <div className="home-container">
         <img src={this.state.profilePic} />
         <h2>{this.state.name}</h2>
+        <h3>Carbon Score: {this.state.carbonScore}</h3>
+        <hr/>
+        <h3>Green Score: {this.state.greenScore}</h3>
+        <hr />
+        <h3>Points Earned: {this.state.pointsEarned}</h3>
+        <hr />
       </div>
     );
   }
